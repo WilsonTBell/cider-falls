@@ -1,37 +1,42 @@
 import { getAreas } from "./database.js";
-import { getAreaServices } from "./database.js";
-import { getServices } from "./database.js";
+import { servicesByArea } from "./services.js";
+import { serviceNames } from "./services.js";
+import { guestsPerArea } from "./guests.js";
 
-areas = getAreas()
-areaServices = getAreaServices()
-services = getServices()
+const areas = getAreas()
+// Event Listener that window alerts a message containing the number of guests in a given area
 
-// function that receives a parameter of an area object and 
-// returns an array with the id of each service offered
+document.addEventListener(
+    "click",
+    (clickEvent) => {
+        const itemClicked = clickEvent.target
+        if (itemClicked.id.startsWith("area")) {
+            const [,areaId] = itemClicked.id.split("--")
 
-const servicesByArea = (area) =>{
-    let filteredAreaServices = []
-    for (const areaService of areaServices) {
-        if(area.id === areaService.areaId){
-            filteredAreaServices.push(areaService.serviceId)
-        }
-    }
-    return filteredAreaServices
-}
-
-// function that receives a parameter of a filtered services array from the 
-// servicesByArea function and returns an html string of those services
-
-const serviceNames = (filteredServices) =>{
-    let offeredServices = ``;
-    for (const serviceId of filteredServices) {
-        for (const service of services) {
-            if(serviceId === service.id){
-                offeredServices += `${service.name}`
+            for (const area of areas) {
+                if (area.id === parseInt(areaId)) {
+                    const currentGuests = guestsPerArea(area)           
+                    window.alert(`There are ${currentGuests} guests in ${area.name}.`)
+                }
             }
         }
     }
-    return offeredServices
-}
+)
 
+
+// Function that creates an html string for each area and calls the functions
+//  which figure out the services offered in said area.
+
+export const areasHTML = () =>{
+    let htmlString = `<div class="areaList">`
+    for (const area of areas) {
+        htmlString += `<article class="area__card"><h2 id=area--${area.id}>${area.name}</h2>`
+        const filteredAreaServices = servicesByArea(area)
+        const servicesHTML = serviceNames(filteredAreaServices)
+        htmlString += servicesHTML
+        htmlString += `</article>`
+    }
+    htmlString += `</div>`
+    return htmlString
+}
  

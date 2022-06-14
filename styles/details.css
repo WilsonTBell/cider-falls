@@ -1,0 +1,43 @@
+#container {
+    display: flex;
+    background-color: palegreen;
+    padding: 5rem;
+}
+
+.areaList {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    gap: 1rem;
+    width: 75%;
+}
+
+.area__card {
+    border: solid cornflowerblue;
+    width: 25%;
+    text-align: center;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(160, 117, 106);
+}
+
+img{
+    padding: 1rem;
+    width: 100px;
+}
+
+footer{
+    display: flex;
+    justify-content: right;
+    background-color: rgba(160, 117, 106);
+}
+
+.serviceList{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
