@@ -30,7 +30,7 @@ document.addEventListener(
 export const areasHTML = () =>{
     let htmlString = `<div class="areaList">`
     for (const area of areas) {
-        htmlString += `<article class="area__card"><h2 id=area--${area.id}>${area.name}</h2>`
+        htmlString += `<article class="area__card"><h2 id=area--${area.id} class="area__title">${area.name}</h2>`
         const filteredAreaServices = servicesByArea(area)
         const servicesHTML = serviceNames(filteredAreaServices)
         htmlString += servicesHTML

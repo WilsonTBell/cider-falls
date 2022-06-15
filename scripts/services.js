@@ -7,7 +7,7 @@ const services = getServices()
 export const servicesHTML = () =>{
     let htmlString = `<div class="serviceList">Park Services:`
     for (const service of services) {
-        htmlString += `<div id="service--${service.id}">${service.name}</div>`
+        htmlString += `<btn id="service--${service.id}">${service.name}</btn>`
     }
     htmlString += `</div>`
     return htmlString
